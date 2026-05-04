@@ -17,7 +17,7 @@ void displayAll();
 
 int main() {
     menuChoice();
-    
+
     return 0;
 }
 
@@ -106,36 +106,30 @@ void find() {
     int x;
     scanf("%d", &x);
 
-    if (head == NULL) {
-        printf("NOT FOUND\n");
-        return;
-    } else {
-        int idx = 0;
-        Node *temp = head;
-        while (temp != NULL && temp->data != x) {
-            temp = temp->next;
-            idx += 1;
-        }
-
-        if (temp == NULL) {
-            printf("NOT FOUND\n");
+    int idx = 0;
+    Node *temp = head;
+    while (temp != NULL) {
+        if (temp->data == x) {
+            printf("FOUND %d\n", idx);
             return;
-        } 
-
-        printf("FOUND %d\n", &idx);
+        }
+        temp = temp->next;
+        idx++;
     }
+    printf("NOT FOUND\n");
 }
 
 void displayAll() {
     if (head == NULL) {
         printf("LIST EMPTY\n");
+        return; 
     }
 
     Node *temp = head;
-
     printf("LIST");
     while (temp != NULL) {
-        printf(" %d", &temp->data);
+        printf(" %d", temp->data); 
+        temp = temp->next; 
     }
     printf("\n");
 }
