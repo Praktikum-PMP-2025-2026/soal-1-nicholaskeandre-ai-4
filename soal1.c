@@ -1,3 +1,10 @@
+/*
+EL 2008 Praktikum Pemecahan Masalah dengan Pemrograman
+Modul : Dynamic Structures
+Pembuat : Nicholas Keandre (13224035)
+Deskripsi : Program untuk melakukan menu add, delete, search, dan view berbasis linked list
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
