@@ -1,5 +1,141 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(void) {
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+Node* head = NULL;
+
+void menuChoice();
+void pushFront();
+void pushBack();
+void delete();
+void find();
+void displayAll();
+
+int main() {
+    menuChoice();
+    
     return 0;
+}
+
+void menuChoice() {
+    int Q, choice;
+    scanf("%d", &Q);
+
+    for (int i = 0; i < Q; i++) {
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: pushFront(); break;
+            case 2: pushBack(); break;
+            case 3: delete(); break;
+            case 4: find(); break;
+            default: break;
+        }
+    }
+
+    displayAll();
+}
+
+void pushFront() {
+    int x;
+    scanf("%d", &x);
+
+    Node *newData = (Node*) malloc(sizeof(Node));
+
+    newData->data = x;
+    newData->next = NULL;
+
+    if (head == NULL) {
+        head = newData;
+    } else {
+        newData->next = head;
+        head = newData;
+    }
+}
+
+void pushBack() {
+    int x;
+    scanf("%d", &x);
+
+    Node *newData = (Node*) malloc(sizeof(Node));
+
+    newData->data = x;
+    newData->next = NULL;
+
+    if (head == NULL) {
+        head = newData;
+    } else {
+        Node *temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newData;
+    }
+}
+
+void delete() {
+    int x;
+    scanf("%d", &x);
+
+    Node *next = head;
+    Node *prev = NULL;
+
+    while (next != NULL && next->data != x) {
+        prev = next;
+        next = next->next;  
+    }
+
+    if (next == NULL) {
+        return;
+    }
+
+    if (prev == NULL) {
+        head = next->next;
+    } else {
+        prev->next = next->next;
+    }
+
+    free(next);
+}
+
+void find() {
+    int x;
+    scanf("%d", &x);
+
+    if (head == NULL) {
+        printf("NOT FOUND\n");
+        return;
+    } else {
+        int idx = 0;
+        Node *temp = head;
+        while (temp != NULL && temp->data != x) {
+            temp = temp->next;
+            idx += 1;
+        }
+
+        if (temp == NULL) {
+            printf("NOT FOUND\n");
+            return;
+        } 
+
+        printf("FOUND %d\n", &idx);
+    }
+}
+
+void displayAll() {
+    if (head == NULL) {
+        printf("LIST EMPTY\n");
+    }
+
+    Node *temp = head;
+
+    printf("LIST");
+    while (temp != NULL) {
+        printf(" %d", &temp->data);
+    }
+    printf("\n");
 }
